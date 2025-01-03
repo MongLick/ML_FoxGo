@@ -126,9 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e3b13a22af2b4dac2087db9e05507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataType: 1
   dayText: {fileID: 1462883180657785147}
-  dataValue: -50
+  dataTypes: 0200000000000000
+  values:
+  - -50
+  - 0
+  space: 450
 --- !u!1 &2554118430774443043
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCB4\uB825 - 50"
+  m_text: "\uD604\uC7AC \uCCB4\uB825 - 50"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
   m_sharedMaterial: {fileID: -6776016962175281344, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
@@ -524,8 +527,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 180, y: 0}
+  m_SizeDelta: {x: 260, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &852781312686882834
 CanvasRenderer:

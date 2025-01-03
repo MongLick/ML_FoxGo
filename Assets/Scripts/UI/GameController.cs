@@ -9,34 +9,42 @@ public class GameController : MonoBehaviour
 
 	public void ApplyUI(GameData gameData)
 	{
-		switch (gameData.dataType)
+		for (int i = 0; i < gameData.DataTypes.Length; i++)
 		{
-			case DataType.Health:
-				model.UpdateHealth(gameData.DataValue);
-				view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
-				break;
+			DataType dataType = gameData.DataTypes[i];
+			float value = gameData.Values[i];
 
-			case DataType.MaxHealth:
-				model.UpdateMaxHealth(gameData.DataValue);
-				view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
-				break;
+			switch (dataType)
+			{
+				case DataType.None:
+					break;
 
-			case DataType.Experience:
-				model.UpdateExperience(gameData.DataValue);
-				view.UpdateExperienceUI(model.CurrentExperience, model.MaxExperience);
-				view.UpdateLevelUI(model.Level);
-				view.UpdateExperienceUI(model.CurrentExperience, model.MaxExperience);
-				break;
+				case DataType.Health:
+					model.UpdateHealth(value);
+					view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
+					break;
 
-			case DataType.AttackPower:
-				model.UpdateAttackPower(gameData.DataValue);
-				view.UpdateAttackPowerUI(model.CurrentAttackPower);
-				break;
+				case DataType.MaxHealth:
+					model.UpdateMaxHealth(value);
+					view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
+					break;
 
-			case DataType.Defense:
-				model.UpdateDefense(gameData.DataValue);
-				view.UpdateDefenseUI(model.CurrentDefense);
-				break;
+				case DataType.Experience:
+					model.UpdateExperience(value);
+					view.UpdateExperienceUI(model.CurrentExperience, model.MaxExperience);
+					view.UpdateLevelUI(model.Level);
+					break;
+
+				case DataType.AttackPower:
+					model.UpdateAttackPower(value);
+					view.UpdateAttackPowerUI(model.CurrentAttackPower);
+					break;
+
+				case DataType.Defense:
+					model.UpdateDefense(value);
+					view.UpdateDefenseUI(model.CurrentDefense);
+					break;
+			}
 		}
 
 		model.DayCount++;

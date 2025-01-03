@@ -623,7 +623,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -8111322212487550922, guid: 4edd415ab2cd6784ea5e7905122a703d, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -696,6 +696,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e3b13a22af2b4dac2087db9e05507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataType: 0
   dayText: {fileID: 7783681247273824954}
-  dataValue: 50
+  dataTypes: 0100000000000000
+  values:
+  - 50
+  - 0
+  space: 450

@@ -1,45 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScrollViewController : MonoBehaviour
 {
 	[Header("Components")]
-	[SerializeField] List<RectTransform> uiObjects = new List<RectTransform>();
-	[SerializeField] GameObject[] uiPrefab;
+	[SerializeField] GameData[] uiPrefab;
 	[SerializeField] ScrollRect scrollRect;
 	[SerializeField] GameController gameController;
 
 	[Header("Specs")]
-	[SerializeField] float space;
+	[SerializeField] float currentYPosition;
 
 	private void Awake()
 	{
-		RectTransform newui = Instantiate(uiPrefab[0], scrollRect.content).GetComponent<RectTransform>();
-		uiObjects.Add(newui);
+		GameData newui = Instantiate(uiPrefab[0], scrollRect.content);
+		RectTransform newuiRect = newui.GetComponent<RectTransform>();
+		newuiRect.anchoredPosition = new Vector2(10f, -currentYPosition);
+		currentYPosition += newui.Space;
 	}
 
 	public void AddNewUiObject()
 	{
 		int randomIndex = Random.Range(1, uiPrefab.Length);
-		RectTransform newui = Instantiate(uiPrefab[randomIndex], scrollRect.content).GetComponent<RectTransform>();
-		uiObjects.Add(newui);
+		CreateNewUiObject(uiPrefab[randomIndex]);
+	}
 
-		GameData gameData = newui.GetComponent<GameData>();
-		if (gameData != null)
-		{
-			gameController.ApplyUI(gameData);
-		}
+	private void CreateNewUiObject(GameData newuiPrefab)
+	{
+		GameData newui = Instantiate(newuiPrefab, scrollRect.content);
 
-		float y = 0f;
-		for(int i = 0; i < uiObjects.Count; i++)
-		{
-			uiObjects[i].anchoredPosition = new Vector2(0f, -y);
-			y += uiObjects[i].sizeDelta.y + space;
-		}
+		gameController.ApplyUI(newui);
 
-		scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, y);
+		RectTransform newuiRect = newui.GetComponent<RectTransform>();
+
+		float objectHeight = newuiRect.sizeDelta.y;
+
+		newuiRect.anchoredPosition = new Vector2(10f, -currentYPosition);
+
+		currentYPosition += objectHeight + newui.Space;
+
+		scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, currentYPosition);
+
 		scrollRect.verticalNormalizedPosition = 0f;
 	}
 }

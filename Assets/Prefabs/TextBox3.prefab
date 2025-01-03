@@ -184,9 +184,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e3b13a22af2b4dac2087db9e05507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataType: 0
   dayText: {fileID: 5889084541148505898}
-  dataValue: 20
+  dataTypes: 0100000000000000
+  values:
+  - 20
+  - 0
+  space: 450
 --- !u!1 &2476010185006493620
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,7 +469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -8111322212487550922, guid: 4edd415ab2cd6784ea5e7905122a703d, type: 3}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

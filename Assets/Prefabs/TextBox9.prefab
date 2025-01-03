@@ -412,6 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e3b13a22af2b4dac2087db9e05507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataType: 0
   dayText: {fileID: 3123443292127667250}
-  dataValue: 0
+  dataTypes: 0000000000000000
+  values:
+  - 0
+  - 0
+  space: 350

@@ -50,9 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57e3b13a22af2b4dac2087db9e05507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dataType: 0
   dayText: {fileID: 3162674179584301842}
-  dataValue: 0
+  dataTypes: 0000000000000000
+  values:
+  - 0
+  - 0
+  space: 250
 --- !u!1 &3632936569697553025
 GameObject:
   m_ObjectHideFlags: 0
