@@ -319,7 +319,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayText: {fileID: 3161900144552197694}
+  victoryPrefab: []
+  randomPrefab: []
+  nextPrefab: {fileID: -1841252036200112563, guid: 7fc3edf4dae85ad43becd394ac49001e, type: 3}
+  leftPrefab: {fileID: 0}
+  rightPrefab: {fileID: 0}
   dataTypes: 0000000000000000
+  dataDayType: 1
+  dataPrefabType: 1
   values:
   - 0
   - 0

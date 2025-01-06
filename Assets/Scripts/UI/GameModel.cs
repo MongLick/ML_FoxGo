@@ -21,42 +21,4 @@ public class GameModel : MonoBehaviour
 	public float CurrentDefense { get { return currentDefense; } set { currentDefense = value; } }
 	[SerializeField] int dayCount;
 	public int DayCount { get { return dayCount; } set { dayCount = value; } }
-
-	public void UpdateExperience(float value)
-	{
-		CurrentExperience += value;
-
-		while (CurrentExperience >= MaxExperience)
-		{
-			LevelUp();
-		}
-	}
-
-	private void LevelUp()
-	{
-		Level++;
-		CurrentExperience -= MaxExperience; 
-		if (CurrentExperience < 0) CurrentExperience = 0;
-	}
-
-	public void UpdateHealth(float value)
-	{
-		CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
-	}
-
-	public void UpdateMaxHealth(float value)
-	{
-		MaxHealth += value;
-		CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
-	}
-
-	public void UpdateAttackPower(float value)
-	{
-		CurrentAttackPower += value;
-	}
-
-	public void UpdateDefense(float value)
-	{
-		CurrentDefense += value;
-	}
 }
