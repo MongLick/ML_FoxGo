@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class ScrollViewController : MonoBehaviour
 {
 	[Header("Components")]
-	[SerializeField] GameData[] uiPrefab;
-	[SerializeField] GameData currentPrefab;
+	[SerializeField] TextBoxData[] boxData;
+	[SerializeField] TextBoxData currentBoxData;
 	[SerializeField] ScrollRect scrollRect;
 	[SerializeField] GameController gameController;
 
@@ -16,66 +16,71 @@ public class ScrollViewController : MonoBehaviour
 
 	private void Awake()
 	{
-		GameData newui = Instantiate(uiPrefab[0], scrollRect.content);
-		currentPrefab = newui;
-		RectTransform newuiRect = newui.GetComponent<RectTransform>();
-		newuiRect.anchoredPosition = new Vector2(10f, -currentYPosition);
-		currentYPosition += newui.Space;
+		TextBoxData newBoxData = Instantiate(boxData[0], scrollRect.content);
+		currentBoxData = newBoxData;
+		RectTransform boxRect = newBoxData.GetComponent<RectTransform>();
+		boxRect.anchoredPosition = new Vector2(10f, -currentYPosition);
+		currentYPosition += newBoxData.Space;
 	}
 
 	public void AddLeftUiObject()
 	{
-		CreateNewUiObject(currentPrefab.LeftPrefab);
+		Manager.Game.IsArrival = false;
+		CreateNewUiObject(currentBoxData.LeftPrefab);
 	}
 
 	public void AddRightUiObject()
 	{
-		CreateNewUiObject(currentPrefab.RightPrefab);
+		Manager.Game.IsArrival = false;
+		CreateNewUiObject(currentBoxData.RightPrefab);
 	}
 
 	public void AddVictoryUiObject()
 	{
+		Manager.Game.IsArrival = false;
 		int randomIndex = Random.Range(0, 6);
-		CreateNewUiObject(currentPrefab.VictoryPrefab[randomIndex]);
+		CreateNewUiObject(currentBoxData.VictoryPrefab[randomIndex]);
 	}
 
 	public void AddNewUiObject()
 	{
-		if (currentPrefab.NextPrefab != null)
+		Manager.Game.IsArrival = false;
+
+		if (currentBoxData.NextPrefab != null)
 		{
-			CreateNewUiObject(currentPrefab.NextPrefab);
+			CreateNewUiObject(currentBoxData.NextPrefab);
 			return;
 		}
 
-		if (currentPrefab.RandomPrefab.Length > 0)
+		if (currentBoxData.RandomPrefab.Length > 0)
 		{
-			randomIndex = Random.Range(0, currentPrefab.RandomPrefab.Length);
-			CreateNewUiObject(currentPrefab.RandomPrefab[randomIndex]);
+			randomIndex = Random.Range(0, currentBoxData.RandomPrefab.Length);
+			CreateNewUiObject(currentBoxData.RandomPrefab[randomIndex]);
 			return;
 		}
 
-		randomIndex = Random.Range(1, uiPrefab.Length);
-		CreateNewUiObject(uiPrefab[randomIndex]);
+		randomIndex = Random.Range(1, boxData.Length);
+		CreateNewUiObject(boxData[randomIndex]);
 	}
 
-	private void CreateNewUiObject(GameData newuiPrefab)
+	private void CreateNewUiObject(TextBoxData boxData)
 	{
-		GameData newui = Instantiate(newuiPrefab, scrollRect.content);
-		currentPrefab = newui;
+		TextBoxData newboxData = Instantiate(boxData, scrollRect.content);
+		currentBoxData = newboxData;
 
-		gameController.ApplyUI(newui);
-		UpdateScrollRect(newui);
+		gameController.ApplyUI(newboxData);
+		UpdateScrollRect(newboxData);
 	}
 
-	private void UpdateScrollRect(GameData newui)
+	private void UpdateScrollRect(TextBoxData boxData)
 	{
-		RectTransform newuiRect = newui.GetComponent<RectTransform>();
+		RectTransform boxRect = boxData.GetComponent<RectTransform>();
 
-		float objectHeight = newuiRect.sizeDelta.y;
+		float objectHeight = boxRect.sizeDelta.y;
 
-		newuiRect.anchoredPosition = new Vector2(10f, -currentYPosition);
+		boxRect.anchoredPosition = new Vector2(10f, -currentYPosition);
 
-		currentYPosition += objectHeight + newui.Space;
+		currentYPosition += objectHeight + boxData.Space;
 
 		scrollRect.content.sizeDelta = new Vector2(scrollRect.content.sizeDelta.x, currentYPosition);
 		scrollRect.verticalNormalizedPosition = 0f;

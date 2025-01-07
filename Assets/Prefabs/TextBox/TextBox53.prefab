@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: -145}
-  m_SizeDelta: {x: 1000, y: 150}
+  m_AnchoredPosition: {x: 500, y: -170}
+  m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3681237495701681501
 CanvasRenderer:
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AspectMode: 0
-  m_AspectRatio: 6.6666665
+  m_AspectRatio: 5
 --- !u!1 &2631799534551338706
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4169343622021722905}
   - component: {fileID: 7679383956495171334}
   m_Layer: 5
-  m_Name: TextBox35
+  m_Name: TextBox53
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -279,15 +279,15 @@ MonoBehaviour:
   victoryPrefab: []
   randomPrefab: []
   nextPrefab: {fileID: 0}
-  leftPrefab: {fileID: -4804597559269839576, guid: aa193d812711ef442b04da555a7a4a22, type: 3}
-  rightPrefab: {fileID: -4804597559269839576, guid: 87c9e39928ce9f3429a8ff58ed9181c0, type: 3}
+  leftPrefab: {fileID: 0}
+  rightPrefab: {fileID: 0}
   dataTypes: 0000000000000000
   dataDayType: 1
-  dataPrefabType: 8
+  dataPrefabType: 16
   values:
   - 0
   - 0
-  space: 250
+  space: 350
 --- !u!1 &8409964922519311071
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,7 +353,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCC9C\uC0AC\uB97C \uB9CC\uB0AC\uC2B5\uB2C8\uB2E4."
+  m_text: "\uD654\uB824\uD55C \uAC11\uC637\uC744 \uC785\uACE0 \uC788\uB294 \uC131\uAE30\uC0AC\uAC00
+    \uB2F9\uC2E0\uC744 \uAC00\uB85C\uB9C9\uC544 \uAC70\uB9CC\uD55C\n\uB9D0\uD22C\uB85C
+    \uB2F9\uC2E0\uC758 \uD138\uAC00\uC8FD\uC744 \uAC00\uC838\uAC04\uB2E4\uACE0 \uD569\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
   m_sharedMaterial: {fileID: -6776016962175281344, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}

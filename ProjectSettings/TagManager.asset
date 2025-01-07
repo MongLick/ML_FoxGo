@@ -56,6 +56,9 @@ TagManager:
   - name: Decorations
     uniqueID: 2239576127
     locked: 0
+  - name: NPC
+    uniqueID: 1714852219
+    locked: 0
   - name: Player
     uniqueID: 477372273
     locked: 0

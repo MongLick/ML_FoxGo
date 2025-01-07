@@ -9,10 +9,16 @@ public class ParallaxBackground : MonoBehaviour
 	[SerializeField] Vector3 moveDirection;
 
 	[Header("Specs")]
-	[SerializeField] float moveSpeed;	[SerializeField] float scrollAmount;
+	[SerializeField] float moveSpeed;	
+	[SerializeField] float scrollAmount;
 
 	private void Update()
 	{
+		if (Manager.Game.IsArrival)
+		{
+			return;
+		}
+
 		transform.position += moveDirection * moveSpeed * Time.deltaTime;
 
 		if (transform.position.x <= -scrollAmount)

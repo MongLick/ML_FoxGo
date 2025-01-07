@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 4169343622021722905}
   - component: {fileID: 7679383956495171334}
   m_Layer: 5
-  m_Name: TextBox18
+  m_Name: TextBox29
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   rightPrefab: {fileID: 0}
   dataTypes: 0000000000000000
   dataDayType: 1
-  dataPrefabType: 7
+  dataPrefabType: 11
   values:
   - 0
   - 0
@@ -353,9 +353,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC8FC\uBCC0 \uC0AC\uB839\uC220 \uAE30\uC6B4 \uB54C\uBB38\uC5D0 \uC5B5\uC555\uAC10\uC744
-    \uB290\uB07C\uACE0 \uC788\uC73C\uB098\n\uC774 \uB9C8\uBC95\uC758 \uC2DC\uC804\uC790\uAC00
-    \uC55E\uC5D0\uC11C \uB2F9\uC2E0\uC744 \uAE30\uB2E4\uB9AC\uACE0 \uC788\uC2B5\uB2C8\uB2E4."
+  m_text: "\uB099\uC624\uB41C \uC545\uB9C8\uAC00 \uB2F9\uC2E0\uC744 \uB9C9\uC544\uC130\uC2B5\uB2C8\uB2E4.
+    \n\uBC30\uAC00 \uACE0\uD508 \uBAA8\uC591\uC785\uB2C8\uB2E4!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
   m_sharedMaterial: {fileID: -6776016962175281344, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}

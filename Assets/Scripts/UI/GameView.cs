@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +5,7 @@ using UnityEngine.UI;
 public class GameView : MonoBehaviour
 {
 	[Header("Components")]
+	[SerializeField] GameModel model;
 	[SerializeField] Sprite[] buttonSprites;
 	[SerializeField] Slider experienceSlider;
 	[SerializeField] Slider healthSlider;
@@ -21,37 +20,59 @@ public class GameView : MonoBehaviour
 	[SerializeField] TMP_Text leftText;
 	[SerializeField] TMP_Text rightText;
 
-	public void UpdateHealthUI(float currentHealth, float maxHealth)
+	private void OnEnable()
 	{
-		healthSlider.maxValue = maxHealth;
-		healthSlider.value = currentHealth;
-		healthText.text = $"{currentHealth}/{maxHealth}";
+		model.OnCurrentHealth += UpdateHealthUI;
+		model.OnMaxHealth += UpdateHealthUI;
+		model.OnCurrentExperience += UpdateExperienceUI;
+		model.OnMaxExperience += UpdateExperienceUI;
+		model.OnLevel += UpdateLevelUI;
+		model.OnCurrentAttackPower += UpdateAttackPowerUI;
+		model.OnCurrentDefense += UpdateDefenseUI;
 	}
 
-	public void UpdateExperienceUI(float currentExperience, float maxExperience)
+	private void OnDisable()
 	{
-		experienceSlider.maxValue = maxExperience;
-		experienceSlider.value = currentExperience;
+		model.OnCurrentHealth -= UpdateHealthUI;
+		model.OnMaxHealth -= UpdateHealthUI;
+		model.OnCurrentExperience -= UpdateExperienceUI;
+		model.OnMaxExperience -= UpdateExperienceUI;
+		model.OnLevel -= UpdateLevelUI;
+		model.OnCurrentAttackPower -= UpdateAttackPowerUI;
+		model.OnCurrentDefense -= UpdateDefenseUI;
 	}
 
-	public void UpdateLevelUI(float level)
+	public void UpdateHealthUI()
 	{
-		levelText.text = $"LV.{level}";
+		healthSlider.maxValue = model.MaxHealth;
+		healthSlider.value = model.CurrentHealth;
+		healthText.text = $"{model.CurrentHealth}/{model.MaxHealth}";
 	}
 
-	public void UpdateAttackPowerUI(float attackPower)
+	public void UpdateExperienceUI()
 	{
-		attackPowerText.text = $"{attackPower}";
+		experienceSlider.maxValue = model.MaxExperience;
+		experienceSlider.value = model.CurrentExperience;
 	}
 
-	public void UpdateDefenseUI(float defense)
+	public void UpdateLevelUI()
 	{
-		defenseText.text = $"{defense}";
+		levelText.text = $"LV.{model.Level}";
 	}
 
-	public void UpdateDayText(GameData gameData, int datCount)
+	public void UpdateAttackPowerUI()
 	{
-		gameData.DayText.text = $"{datCount} 일차";
+		attackPowerText.text = $"{model.CurrentAttackPower}";
+	}
+
+	public void UpdateDefenseUI()
+	{
+		defenseText.text = $"{model.CurrentDefense}";
+	}
+
+	public void UpdateDayText(TextBoxData boxData)
+	{
+		boxData.DayText.text = $"{model.DayCount} 일차";
 	}
 
 	public void UpdateButtonStates(bool isChoice)

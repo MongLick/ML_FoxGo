@@ -1,26 +1,28 @@
 using UnityEngine;
-using static GameData;
+using static TextBoxData;
 
 public class GameController : MonoBehaviour
 {
 	[Header("Components")]
 	[SerializeField] GameModel model;
 	[SerializeField] GameView view;
+	[SerializeField] ObjectSpawner spawner;
 
-	public void ApplyUI(GameData gameData)
+	public void ApplyUI(TextBoxData boxData)
 	{
-		UpdateSpecs(gameData);
-		UpdateDay(gameData);
-		UpdateButton(gameData);
-		UpdateButtonText(gameData);
+		UpdateSpecs(boxData);
+		UpdateDay(boxData);
+		UpdateButton(boxData);
+		UpdateButtonText(boxData);
+		ObjectSpawn(boxData);
 	}
 
-	private void UpdateSpecs(GameData gameData)
+	private void UpdateSpecs(TextBoxData boxData)
 	{
-		for (int i = 0; i < gameData.DataTypes.Length; i++)
+		for (int i = 0; i < boxData.DataTypes.Length; i++)
 		{
-			DataType dataType = gameData.DataTypes[i];
-			float value = gameData.Values[i];
+			DataType dataType = boxData.DataTypes[i];
+			float value = boxData.Values[i];
 
 			switch (dataType)
 			{
@@ -29,36 +31,30 @@ public class GameController : MonoBehaviour
 
 				case DataType.Health:
 					UpdateHealth(value);
-					view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
 					break;
 
 				case DataType.MaxHealth:
 					UpdateMaxHealth(value);
-					view.UpdateHealthUI(model.CurrentHealth, model.MaxHealth);
 					break;
 
 				case DataType.Experience:
 					UpdateExperience(value);
-					view.UpdateExperienceUI(model.CurrentExperience, model.MaxExperience);
-					view.UpdateLevelUI(model.Level);
 					break;
 
 				case DataType.AttackPower:
 					UpdateAttackPower(value);
-					view.UpdateAttackPowerUI(model.CurrentAttackPower);
 					break;
 
 				case DataType.Defense:
 					UpdateDefense(value);
-					view.UpdateDefenseUI(model.CurrentDefense);
 					break;
 			}
 		}
 	}
 
-	private void UpdateDay(GameData gameData)
+	private void UpdateDay(TextBoxData boxData)
 	{
-		DayType dayType = gameData.DataDayType;
+		DayType dayType = boxData.DataDayType;
 
 		switch (dayType)
 		{
@@ -67,7 +63,7 @@ public class GameController : MonoBehaviour
 
 			case DayType.NextDay:
 				UpdateDay();
-				view.UpdateDayText(gameData, model.DayCount);
+				view.UpdateDayText(boxData);
 				break;
 		}
 	}
@@ -115,12 +111,12 @@ public class GameController : MonoBehaviour
 		model.DayCount++;
 	}
 
-	private void UpdateButton(GameData gameData)
+	private void UpdateButton(TextBoxData bosData)
 	{
-		view.UpdateButtonStates(gameData.LeftPrefab != null);
+		view.UpdateButtonStates(bosData.LeftPrefab != null);
 	}
 
-	private void UpdateButtonText(GameData gameData)
+	private void UpdateButtonText(TextBoxData gameData)
 	{
 		PrefabType prefabType = gameData.DataPrefabType;
 
@@ -130,7 +126,7 @@ public class GameController : MonoBehaviour
 				view.UpdateDefaultButton("다음날", 0);
 				break;
 			case PrefabType.Move:
-				view.UpdateDefaultButton("이동중", 1);
+				view.UpdateDefaultButton("이동하기", 1);
 				break;
 			case PrefabType.Daughter:
 				view.UpdateDefaultButton("기도", 2);
@@ -147,12 +143,41 @@ public class GameController : MonoBehaviour
 			case PrefabType.Obelisk:
 				view.UpdateDefaultButton("희생", 2);
 				break;
-			case PrefabType.Monster:
-				view.UpdateDefaultButton("전투중", 3);
-				break;
-			case PrefabType.Angel:
+			case PrefabType.Adventurer:
 				view.UpdateChoiceButton("공격력↑", "체력↑", 2);
 				break;
+			case PrefabType.Skeleton:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Warrior:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Necromancer:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Demon:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Knight:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Swordsman:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Wizard:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.StrongKnight:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
+			case PrefabType.Paladin:
+				view.UpdateDefaultButton("전투중", 3);
+				break;
 		}
+	}
+
+	private void ObjectSpawn(TextBoxData bosData)
+	{
+		spawner.Spawn(bosData);
 	}
 }
