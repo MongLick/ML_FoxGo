@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,10 +66,13 @@ public class ScrollViewController : MonoBehaviour
 
 	private void CreateNewUiObject(TextBoxData boxData)
 	{
+		gameController.SpawnWithDelay(boxData);
+	}
+
+	public void CreateBoxObject(TextBoxData boxData)
+	{
 		TextBoxData newboxData = Instantiate(boxData, scrollRect.content);
 		currentBoxData = newboxData;
-
-		gameController.ApplyUI(newboxData);
 		UpdateScrollRect(newboxData);
 	}
 

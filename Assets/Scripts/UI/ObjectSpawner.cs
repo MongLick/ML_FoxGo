@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TextBoxData;
@@ -34,12 +35,15 @@ public class ObjectSpawner : MonoBehaviour
 		};
 	}
 
-	public void Spawn(TextBoxData boxData)
+	public GameObject Spawn(TextBoxData boxData)
 	{
 		PrefabType prefabType = boxData.DataPrefabType;
+
 		if (prefabDict.TryGetValue(prefabType, out var prefabAndPosition))
 		{
-			Instantiate(prefabAndPosition.prefab, prefabAndPosition.spawnPosition, Quaternion.identity);
+			 return Instantiate(prefabAndPosition.prefab, prefabAndPosition.spawnPosition, Quaternion.identity);
 		}
+
+		return null;
 	}
 }

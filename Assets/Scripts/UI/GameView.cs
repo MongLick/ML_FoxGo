@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -94,5 +95,10 @@ public class GameView : MonoBehaviour
 		rightText.text = right;
 		leftButton.image.sprite = buttonSprites[number];
 		rightButton.image.sprite = buttonSprites[number];
+	}
+
+	public void SetButtonInteractable(bool interactable)
+	{
+		defaultButton.interactable = interactable;
 	}
 }

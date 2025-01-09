@@ -1,20 +1,36 @@
+using System.Collections;
 using UnityEngine;
 using static TextBoxData;
 
 public class GameController : MonoBehaviour
 {
 	[Header("Components")]
+	[SerializeField] ScrollViewController scrollViewController;
 	[SerializeField] GameModel model;
 	[SerializeField] GameView view;
 	[SerializeField] ObjectSpawner spawner;
 
-	public void ApplyUI(TextBoxData boxData)
+	public void SpawnWithDelay(TextBoxData boxData)
+	{
+		GameObject spawnedObject = spawner.Spawn(boxData);
+
+		if (spawnedObject != null)
+		{
+			StartCoroutine(WaitForCompletionAndUpdateUI(spawnedObject, boxData));
+		}
+		else
+		{
+			ApplyUI(boxData);
+		}
+	}
+
+	private void ApplyUI(TextBoxData boxData)
 	{
 		UpdateSpecs(boxData);
 		UpdateDay(boxData);
 		UpdateButton(boxData);
 		UpdateButtonText(boxData);
-		ObjectSpawn(boxData);
+		scrollViewController.CreateBoxObject(boxData);
 	}
 
 	private void UpdateSpecs(TextBoxData boxData)
@@ -127,6 +143,7 @@ public class GameController : MonoBehaviour
 				break;
 			case PrefabType.Move:
 				view.UpdateDefaultButton("이동하기", 1);
+				model.IsMoveButtonOn = true;
 				break;
 			case PrefabType.Daughter:
 				view.UpdateDefaultButton("기도", 2);
@@ -147,37 +164,74 @@ public class GameController : MonoBehaviour
 				view.UpdateChoiceButton("공격력↑", "체력↑", 2);
 				break;
 			case PrefabType.Skeleton:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Warrior:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Necromancer:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Demon:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Knight:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Swordsman:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Wizard:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.StrongKnight:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 			case PrefabType.Paladin:
-				view.UpdateDefaultButton("전투중", 3);
+				view.UpdateDefaultButton("전투하기", 3);
 				break;
 		}
 	}
 
-	private void ObjectSpawn(TextBoxData bosData)
+	public void ObjectSpawn(TextBoxData bosData)
 	{
 		spawner.Spawn(bosData);
+	}
+
+	public void DefaultButtonCheck()
+	{
+		if (model.IsMoveButtonClick)
+		{
+			view.UpdateDefaultButton("이동중", 1);
+			view.SetButtonInteractable(false);
+			StartCoroutine(MoveToDestination());
+		}
+
+		if (model.IsMoveButtonOn)
+		{
+			model.IsMoveButtonClick = true;
+		}
+	}
+
+	private IEnumerator WaitForCompletionAndUpdateUI(GameObject spawnedObject, TextBoxData boxData)
+	{
+		ParallaxNPC npc = spawnedObject.GetComponent<ParallaxNPC>();
+
+		if (npc == null)
+		{
+			yield break;
+		}
+
+		yield return new WaitUntil(() => npc.IsCompletion);
+
+		ApplyUI(boxData);
+	}
+
+	private IEnumerator MoveToDestination()
+	{
+		yield return new WaitUntil(() => Manager.Game.IsArrival);
+		view.SetButtonInteractable(true);
+		model.IsMoveButtonOn = false;
+		model.IsMoveButtonClick = false;
 	}
 }

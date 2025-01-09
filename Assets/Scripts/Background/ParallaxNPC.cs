@@ -9,6 +9,7 @@ public class ParallaxNPC : MonoBehaviour
 	[SerializeField] float moveSpeed;
 	[SerializeField] float scrollAmount;
 	[SerializeField] bool isCompletion;
+	public bool IsCompletion { get { return isCompletion; } }
 
 	private void OnEnable()
 	{
