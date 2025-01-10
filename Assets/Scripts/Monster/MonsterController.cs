@@ -1,26 +1,27 @@
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class MonsterController : MonoBehaviour, IDamageable
 {
 	[Header("Components")]
 	[SerializeField] BoxCollider2D attackCollider;
-	[SerializeField] GameModel gameModel;
 	[SerializeField] Animator animator;
 
 	[Header("Specs")]
 	[SerializeField] LayerMask layer;
 	[SerializeField] float moveSpeed;
+	[SerializeField] float health;
+	[SerializeField] float damage;
 
 	private void OnEnable()
 	{
-		Manager.Game.OnArrivalStateChanged += UpdateAnimatorState;
+		Manager.Game.OnArrivalStateChanged += UpdatePlayerTurn;
 		Manager.Turn.OnTurnChanged += UpdateTurnChanged;
 	}
 
 	private void OnDisable()
 	{
-		Manager.Game.OnArrivalStateChanged -= UpdateAnimatorState;
+		Manager.Game.OnArrivalStateChanged -= UpdatePlayerTurn;
 		Manager.Turn.OnTurnChanged -= UpdateTurnChanged;
 	}
 
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 			IDamageable damageable = collision.GetComponent<IDamageable>();
 			if (damageable != null)
 			{
-				damageable.TakeDamage(gameModel.CurrentAttackPower);
+				damageable.TakeDamage(damage);
 			}
 		}
 	}
@@ -42,43 +43,48 @@ public class PlayerController : MonoBehaviour, IDamageable
 		attackCollider.gameObject.SetActive(isActive);
 	}
 
+	private void UpdatePlayerTurn()
+	{
+		StartCoroutine(PlayerTurn());
+	}
+
 	private void UpdateTurnChanged(TurnManager.Turn turn)
 	{
-		if (turn == TurnManager.Turn.Player)
+		if (turn == TurnManager.Turn.Monster)
 		{
 			StartCoroutine(MoveToTargetAndAttack());
 		}
 	}
 
-	private void UpdateAnimatorState()
-	{
-		animator.SetBool("Idle", Manager.Game.IsArrival);
-	}
-
 	public void TakeDamage(float damage)
 	{
-		float monsterDamage = damage - gameModel.CurrentDefense;
-		gameModel.CurrentHealth -= monsterDamage;
+		health -= damage;
 		animator.SetTrigger("TakeHit");
 
-		if (gameModel.CurrentHealth <= 0)
+		if (health <= 0)
 		{
 			animator.SetBool("Die", true);
 		}
 	}
 
-	public IEnumerator MoveToTargetAndAttack()
+	private IEnumerator PlayerTurn()
 	{
-		animator.SetBool("Idle", false);
-		yield return MoveTo(Manager.Game.MonsterTargetX);
-		animator.SetBool("Idle", true);
+		yield return new WaitForSeconds(1f);
+		Manager.Turn.CurrentTurn = TurnManager.Turn.Player;
+	}
+
+	private IEnumerator MoveToTargetAndAttack()
+	{
+		animator.SetBool("Move", true);
+		yield return MoveTo(Manager.Game.PlayerTargetX);
+		animator.SetBool("Move", false);
 		animator.SetTrigger("Attack");
 		yield return new WaitForSeconds(1f);
-		animator.SetBool("Idle", false);
-		yield return MoveTo(Manager.Game.PlayerOriginalX);
-		animator.SetBool("Idle", true);
+		animator.SetBool("Move", true);
+		yield return MoveTo(Manager.Game.MonsterOriginalX);
+		animator.SetBool("Move", false);
 
-		Manager.Turn.CurrentTurn = TurnManager.Turn.Monster;
+		Manager.Turn.CurrentTurn = TurnManager.Turn.Player;
 	}
 
 	private IEnumerator MoveTo(float targetX)

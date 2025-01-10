@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ParallaxNPC : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ParallaxNPC : MonoBehaviour
 	[Header("Specs")]
 	[SerializeField] float moveSpeed;
 	[SerializeField] float scrollAmount;
+	[SerializeField] float xPosition;
 	[SerializeField] bool isCompletion;
 	public bool IsCompletion { get { return isCompletion; } }
 
@@ -23,7 +25,7 @@ public class ParallaxNPC : MonoBehaviour
 			return;
 		}
 
-		if (transform.position.x <= 0 && !isCompletion)
+		if (transform.position.x <= xPosition && !isCompletion)
 		{
 			Manager.Game.IsArrival = true;
 			isCompletion = true;

@@ -3061,6 +3061,8 @@ MonoBehaviour:
   moveDirection: {x: -1, y: 0, z: 0}
   moveSpeed: 3
   scrollAmount: -10
+  xPosition: 0
+  isCompletion: 0
 --- !u!1 &5848429841983129497
 GameObject:
   m_ObjectHideFlags: 0
