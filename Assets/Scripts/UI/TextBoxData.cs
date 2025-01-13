@@ -10,8 +10,6 @@ public class TextBoxData : MonoBehaviour
 	[Header("Components")]
 	[SerializeField] TMP_Text dayText;
 	public TMP_Text DayText { get { return dayText; } set { dayText = value; } }
-	[SerializeField] TextBoxData[] victoryPrefab;
-	public TextBoxData[] VictoryPrefab { get { return victoryPrefab; } }
 	[SerializeField] TextBoxData[] randomPrefab;
 	public TextBoxData[] RandomPrefab { get { return randomPrefab; } }
 	[SerializeField] TextBoxData nextPrefab;

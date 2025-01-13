@@ -660,6 +660,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7792928134889819733}
   - component: {fileID: 8385467610307271809}
+  - component: {fileID: 8037679868340716561}
   m_Layer: 6
   m_Name: Attack
   m_TagString: Untagged
@@ -731,6 +732,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8037679868340716561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846103684908927015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce050d35e62dff943aafe776d1060c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: 7835811279733308769}
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1976671744553258707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3496,10 +3513,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8399721816190987318}
-  - component: {fileID: 6719598963673873581}
   - component: {fileID: 4145060560487882011}
   - component: {fileID: 7835811279733308769}
   - component: {fileID: 9156018754406030813}
+  - component: {fileID: 3022146989783150473}
   m_Layer: 6
   m_Name: Demon
   m_TagString: Untagged
@@ -3528,25 +3545,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6719598963673873581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8023447401521497796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ac21711b0ec40a0812d33a586eb7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _version: 131
-  _spriteOBj: {fileID: 473838333579294163}
-  EditChk: 0
-  _code: Unit13
-  _anim: {fileID: 0}
-  _horse: 0
-  _horseString: 
 --- !u!114 &4145060560487882011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3578,12 +3576,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 8385467610307271809}
   animator: {fileID: 1828452548198574811}
-  layer:
-    serializedVersion: 2
-    m_Bits: 8
   moveSpeed: 3
-  health: 0
-  damage: 0
+  health: 300
+  damage: 50
 --- !u!61 &9156018754406030813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3629,6 +3624,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &3022146989783150473
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8023447401521497796}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8077591117390970622
 GameObject:
   m_ObjectHideFlags: 0

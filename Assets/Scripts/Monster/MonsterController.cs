@@ -8,10 +8,10 @@ public class MonsterController : MonoBehaviour, IDamageable
 	[SerializeField] Animator animator;
 
 	[Header("Specs")]
-	[SerializeField] LayerMask layer;
 	[SerializeField] float moveSpeed;
 	[SerializeField] float health;
 	[SerializeField] float damage;
+	public float Damage { get { return damage; } }
 
 	private void OnEnable()
 	{
@@ -23,24 +23,6 @@ public class MonsterController : MonoBehaviour, IDamageable
 	{
 		Manager.Game.OnArrivalStateChanged -= UpdatePlayerTurn;
 		Manager.Turn.OnTurnChanged -= UpdateTurnChanged;
-	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (layer.Contain(collision.gameObject.layer))
-		{
-			IDamageable damageable = collision.GetComponent<IDamageable>();
-			if (damageable != null)
-			{
-				damageable.TakeDamage(damage);
-			}
-		}
-	}
-
-	public void TriggerAttackCollider(int state)
-	{
-		bool isActive = (state == 1);
-		attackCollider.gameObject.SetActive(isActive);
 	}
 
 	private void UpdatePlayerTurn()
@@ -63,7 +45,9 @@ public class MonsterController : MonoBehaviour, IDamageable
 
 		if (health <= 0)
 		{
+			Manager.Game.OnMonsterDeath?.Invoke();
 			animator.SetBool("Die", true);
+			Destroy(gameObject);
 		}
 	}
 
@@ -79,7 +63,9 @@ public class MonsterController : MonoBehaviour, IDamageable
 		yield return MoveTo(Manager.Game.PlayerTargetX);
 		animator.SetBool("Move", false);
 		animator.SetTrigger("Attack");
+		attackCollider.gameObject.SetActive(true);
 		yield return new WaitForSeconds(1f);
+		attackCollider.gameObject.SetActive(false);
 		animator.SetBool("Move", true);
 		yield return MoveTo(Manager.Game.MonsterOriginalX);
 		animator.SetBool("Move", false);

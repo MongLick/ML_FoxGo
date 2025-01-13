@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 	[SerializeField] Animator animator;
 
 	[Header("Specs")]
-	[SerializeField] LayerMask layer;
 	[SerializeField] float moveSpeed;
 
 	private void OnEnable()
@@ -22,18 +21,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 	{
 		Manager.Game.OnArrivalStateChanged -= UpdateAnimatorState;
 		Manager.Turn.OnTurnChanged -= UpdateTurnChanged;
-	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (layer.Contain(collision.gameObject.layer))
-		{
-			IDamageable damageable = collision.GetComponent<IDamageable>();
-			if (damageable != null)
-			{
-				damageable.TakeDamage(gameModel.CurrentAttackPower);
-			}
-		}
 	}
 
 	public void TriggerAttackCollider(int state)
@@ -76,6 +63,12 @@ public class PlayerController : MonoBehaviour, IDamageable
 		yield return new WaitForSeconds(1f);
 		animator.SetBool("Idle", false);
 		yield return MoveTo(Manager.Game.PlayerOriginalX);
+
+		if(!Manager.Game.IsArrival)
+		{
+			yield break;
+		}
+
 		animator.SetBool("Idle", true);
 
 		Manager.Turn.CurrentTurn = TurnManager.Turn.Monster;

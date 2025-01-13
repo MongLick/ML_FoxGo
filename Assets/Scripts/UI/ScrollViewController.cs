@@ -7,6 +7,7 @@ public class ScrollViewController : MonoBehaviour
 {
 	[Header("Components")]
 	[SerializeField] TextBoxData[] boxData;
+	[SerializeField] TextBoxData[] victoryBoxData;
 	[SerializeField] TextBoxData currentBoxData;
 	[SerializeField] ScrollRect scrollRect;
 	[SerializeField] GameController gameController;
@@ -38,9 +39,8 @@ public class ScrollViewController : MonoBehaviour
 
 	public void AddVictoryUiObject()
 	{
-		Manager.Game.IsArrival = false;
 		int randomIndex = Random.Range(0, 6);
-		CreateNewUiObject(currentBoxData.VictoryPrefab[randomIndex]);
+		CreateNewUiObject(victoryBoxData[randomIndex]);
 	}
 
 	public void AddNewUiObject()

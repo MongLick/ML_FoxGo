@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using static TextBoxData;
 
@@ -9,6 +11,16 @@ public class GameController : MonoBehaviour
 	[SerializeField] GameModel model;
 	[SerializeField] GameView view;
 	[SerializeField] ObjectSpawner spawner;
+
+	private void OnEnable()
+	{
+		Manager.Game.OnMonsterDeath += MonsterDeath;
+	}
+
+	private void OnDisable()
+	{
+		Manager.Game.OnMonsterDeath -= MonsterDeath;
+	}
 
 	public void SpawnWithDelay(TextBoxData boxData)
 	{
@@ -136,6 +148,25 @@ public class GameController : MonoBehaviour
 	{
 		PrefabType prefabType = gameData.DataPrefabType;
 
+		HashSet<PrefabType> combatPrefabTypes = new HashSet<PrefabType>
+	{
+		PrefabType.Skeleton,
+		PrefabType.Warrior,
+		PrefabType.Necromancer,
+		PrefabType.Demon,
+		PrefabType.Knight,
+		PrefabType.Swordsman,
+		PrefabType.Wizard,
+		PrefabType.StrongKnight,
+		PrefabType.Paladin
+	};
+
+		if (combatPrefabTypes.Contains(prefabType))
+		{
+			Manager.Game.IsCombat = true;
+			return;
+		}
+
 		switch (prefabType)
 		{
 			case PrefabType.None:
@@ -163,33 +194,6 @@ public class GameController : MonoBehaviour
 			case PrefabType.Adventurer:
 				view.UpdateChoiceButton("공격력↑", "체력↑", 2);
 				break;
-			case PrefabType.Skeleton:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Warrior:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Necromancer:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Demon:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Knight:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Swordsman:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Wizard:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.StrongKnight:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
-			case PrefabType.Paladin:
-				view.UpdateDefaultButton("전투하기", 3);
-				break;
 		}
 	}
 
@@ -213,6 +217,27 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	public void StartCombat()
+	{
+		view.UpdateDefaultButton("전투중", 3);
+		view.SetButtonInteractable(false);
+	}
+
+	private void EndCombat()
+	{
+		view.UpdateDefaultButton("다음날", 0);
+		view.SetButtonInteractable(true);
+		Manager.Game.IsCombat = false;
+		Manager.Game.IsArrival = false;
+	}
+
+	private void MonsterDeath()
+	{
+		scrollViewController.AddVictoryUiObject();
+
+		StartCoroutine(CombatCoroutine());
+	}
+
 	private IEnumerator WaitForCompletionAndUpdateUI(GameObject spawnedObject, TextBoxData boxData)
 	{
 		ParallaxNPC npc = spawnedObject.GetComponent<ParallaxNPC>();
@@ -233,5 +258,16 @@ public class GameController : MonoBehaviour
 		view.SetButtonInteractable(true);
 		model.IsMoveButtonOn = false;
 		model.IsMoveButtonClick = false;
+
+		if(Manager.Game.IsCombat)
+		{
+			StartCombat();
+		}
+	}
+
+	private IEnumerator CombatCoroutine()
+	{
+		yield return new WaitForSeconds(1.5f);
+		EndCombat();
 	}
 }

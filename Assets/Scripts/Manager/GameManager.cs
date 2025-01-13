@@ -6,6 +6,8 @@ public class GameManager : Singleton<GameManager>
 	[Header("UnityAction")]
 	private UnityAction onArrivalStateChanged;
 	public UnityAction OnArrivalStateChanged { get { return onArrivalStateChanged; } set { onArrivalStateChanged = value; } }
+	private UnityAction onMonsterDeath;
+	public UnityAction OnMonsterDeath { get { return onMonsterDeath; } set { onMonsterDeath = value; } }
 
 	[Header("Specs")]
 	[SerializeField] float playerOriginalX;

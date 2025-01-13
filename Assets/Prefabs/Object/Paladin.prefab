@@ -1231,10 +1231,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6106535797925526639}
-  - component: {fileID: 8444579828095526072}
   - component: {fileID: 5021835329931150204}
   - component: {fileID: -1971369880236877154}
   - component: {fileID: 118799205899623506}
+  - component: {fileID: 7534799686392665667}
   m_Layer: 6
   m_Name: Paladin
   m_TagString: Untagged
@@ -1263,25 +1263,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8444579828095526072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3044867663497730435}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28ac21711b0ec40a0812d33a586eb7ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _version: 131
-  _spriteOBj: {fileID: 3786841398234299445}
-  EditChk: 1
-  _code: Unit6
-  _anim: {fileID: 0}
-  _horse: 0
-  _horseString: 
 --- !u!114 &5021835329931150204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1313,12 +1294,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 3918830443785242048}
   animator: {fileID: 5435675057875732421}
-  layer:
-    serializedVersion: 2
-    m_Bits: 8
   moveSpeed: 3
-  health: 0
-  damage: 0
+  health: 300
+  damage: 50
 --- !u!61 &118799205899623506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1364,6 +1342,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &7534799686392665667
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044867663497730435}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &3425658538639598791
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,6 +2758,7 @@ GameObject:
   m_Component:
   - component: {fileID: 869783640398979608}
   - component: {fileID: 3918830443785242048}
+  - component: {fileID: 1154200469958674053}
   m_Layer: 6
   m_Name: Attack
   m_TagString: Untagged
@@ -2824,6 +2830,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1154200469958674053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6275360759104121376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce050d35e62dff943aafe776d1060c7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monster: {fileID: -1971369880236877154}
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6304440998410833947
 GameObject:
   m_ObjectHideFlags: 0
