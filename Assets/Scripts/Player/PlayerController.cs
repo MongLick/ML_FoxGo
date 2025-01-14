@@ -48,6 +48,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 		gameModel.CurrentHealth -= monsterDamage;
 		animator.SetTrigger("TakeHit");
 
+		Vector3 worldPosition = transform.position + Vector3.up * 0.5f;
+		Manager.UI.ShowDamageText(worldPosition, monsterDamage);
+
 		if (gameModel.CurrentHealth <= 0)
 		{
 			animator.SetBool("Die", true);

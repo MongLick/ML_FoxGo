@@ -3,7 +3,7 @@ using UnityEngine;
 public class MonsterAttack : MonoBehaviour
 {
 	[Header("Components")]
-	[SerializeField] MonsterController monster;
+	[SerializeField] MonsterModel monster;
 
 	[Header("Specs")]
 	[SerializeField] LayerMask layer;

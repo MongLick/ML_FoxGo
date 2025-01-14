@@ -4,6 +4,8 @@ public static class Manager
 {
 	public static GameManager Game { get { return GameManager.Instance; } }
 	public static TurnManager Turn { get { return TurnManager.Instance; } }
+	public static UIManager UI { get { return UIManager.Instance; } }
+	public static PoolManager Pool { get { return PoolManager.Instance; } }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	private static void Initialize()
@@ -13,5 +15,11 @@ public static class Manager
 
 		TurnManager.ReleaseInstance();
 		TurnManager.CreateInstance();
+
+		UIManager.ReleaseInstance();
+		UIManager.CreateInstance();
+
+		PoolManager.ReleaseInstance();
+		PoolManager.CreateInstance();
 	}
 }

@@ -6,12 +6,7 @@ public class MonsterController : MonoBehaviour, IDamageable
 	[Header("Components")]
 	[SerializeField] BoxCollider2D attackCollider;
 	[SerializeField] Animator animator;
-
-	[Header("Specs")]
-	[SerializeField] float moveSpeed;
-	[SerializeField] float health;
-	[SerializeField] float damage;
-	public float Damage { get { return damage; } }
+	[SerializeField] MonsterModel monsterModel;
 
 	private void OnEnable()
 	{
@@ -40,14 +35,17 @@ public class MonsterController : MonoBehaviour, IDamageable
 
 	public void TakeDamage(float damage)
 	{
-		health -= damage;
+		monsterModel.CurrentHealth -= damage;
 		animator.SetTrigger("TakeHit");
 
-		if (health <= 0)
+		Vector3 worldPosition = transform.position + Vector3.up * 1f;
+		Manager.UI.ShowDamageText(worldPosition, damage);
+
+		if (monsterModel.CurrentHealth <= 0)
 		{
 			Manager.Game.OnMonsterDeath?.Invoke();
 			animator.SetBool("Die", true);
-			Destroy(gameObject);
+			StartCoroutine(DieCoroutine());
 		}
 	}
 
@@ -78,9 +76,15 @@ public class MonsterController : MonoBehaviour, IDamageable
 		Vector3 currentPosition = transform.position;
 		while (Mathf.Abs(transform.position.x - targetX) > 0.01f)
 		{
-			float newX = Mathf.MoveTowards(transform.position.x, targetX, moveSpeed * Time.deltaTime);
+			float newX = Mathf.MoveTowards(transform.position.x, targetX, monsterModel.MoveSpeed * Time.deltaTime);
 			transform.position = new Vector3(newX, currentPosition.y, currentPosition.z);
 			yield return null;
 		}
+	}
+
+	private IEnumerator DieCoroutine()
+	{
+		yield return new WaitForSeconds(1f);
+		Destroy(gameObject);
 	}
 }
