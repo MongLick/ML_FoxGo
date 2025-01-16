@@ -8,6 +8,11 @@ public class MonsterController : MonoBehaviour, IDamageable
 	[SerializeField] Animator animator;
 	[SerializeField] MonsterModel monsterModel;
 
+	private void Start()
+	{
+		UpdateHealthAndDamage();
+	}
+
 	private void OnEnable()
 	{
 		Manager.Game.OnArrivalStateChanged += UpdatePlayerTurn;
@@ -18,6 +23,13 @@ public class MonsterController : MonoBehaviour, IDamageable
 	{
 		Manager.Game.OnArrivalStateChanged -= UpdatePlayerTurn;
 		Manager.Turn.OnTurnChanged -= UpdateTurnChanged;
+	}
+
+	private void UpdateHealthAndDamage()
+	{
+		monsterModel.MaxHealth += Manager.Game.DayCount * 5;
+		monsterModel.CurrentHealth += Manager.Game.DayCount * 5;
+		monsterModel.Damage += Manager.Game.DayCount * 2;
 	}
 
 	private void UpdatePlayerTurn()
@@ -61,6 +73,7 @@ public class MonsterController : MonoBehaviour, IDamageable
 		yield return MoveTo(Manager.Game.PlayerTargetX);
 		animator.SetBool("Move", false);
 		animator.SetTrigger("Attack");
+		yield return new WaitForSeconds(0.2f);
 		attackCollider.gameObject.SetActive(true);
 		yield return new WaitForSeconds(1f);
 		attackCollider.gameObject.SetActive(false);

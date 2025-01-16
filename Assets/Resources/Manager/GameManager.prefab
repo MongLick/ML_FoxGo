@@ -48,5 +48,6 @@ MonoBehaviour:
   playerTargetX: -1
   monsterOriginalX: 1.5
   monsterTargetX: 1
+  dayCount: 1
   isArrival: 0
   isCombat: 0

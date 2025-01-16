@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC80\uC220\uC0AC\uB97C \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4."
+  m_text: "\uB9C8\uBC95\uC0AC\uB97C \uBC1C\uACAC\uD588\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
   m_sharedMaterial: {fileID: -6776016962175281344, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
@@ -321,7 +321,7 @@ MonoBehaviour:
   dayText: {fileID: 3161900144552197694}
   victoryPrefab: []
   randomPrefab: []
-  nextPrefab: {fileID: 7679383956495171334, guid: 4308bca5d08061f408bac7fd6bc632f2, type: 3}
+  nextPrefab: {fileID: 7679383956495171334, guid: bec33b78fd39dfa4ebd5e784b9742896, type: 3}
   leftPrefab: {fileID: 0}
   rightPrefab: {fileID: 0}
   dataTypes: 0000000000000000

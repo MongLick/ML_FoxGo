@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
 		if (gameModel.CurrentHealth <= 0)
 		{
+			Manager.Game.OnPlayerDeath?.Invoke();
 			animator.SetBool("Die", true);
 		}
 	}

@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour
 
 	private void UpdateDay()
 	{
-		model.DayCount++;
+		Manager.Game.DayCount++;
 	}
 
 	private void UpdateButton(TextBoxData bosData)
@@ -236,6 +236,12 @@ public class GameController : MonoBehaviour
 		scrollViewController.AddVictoryUiObject();
 
 		StartCoroutine(CombatCoroutine());
+	}
+
+	public void TitleSceneLoad()
+	{
+		Time.timeScale = 1f;
+		Manager.Scene.LoadScene("TitleScene");
 	}
 
 	private IEnumerator WaitForCompletionAndUpdateUI(GameObject spawnedObject, TextBoxData boxData)

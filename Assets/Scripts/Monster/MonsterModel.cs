@@ -13,7 +13,7 @@ public class MonsterModel : MonoBehaviour
 	[SerializeField] float moveSpeed;
 	public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 	[SerializeField] float maxHealth;
-	public float MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+	public float MaxHealth { get { return maxHealth; } set { maxHealth = value; onCurrentHealth?.Invoke(); } }
 	[SerializeField] float currentHealth;
 	public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; onCurrentHealth?.Invoke(); } }
 	[SerializeField] float damage;

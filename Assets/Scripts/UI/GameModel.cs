@@ -36,8 +36,6 @@ public class GameModel : MonoBehaviour
 	public float CurrentAttackPower { get { return currentAttackPower; } set { currentAttackPower = value; onCurrentAttackPower?.Invoke(); } }
 	[SerializeField] float currentDefense;
 	public float CurrentDefense { get { return currentDefense; } set { currentDefense = value; onCurrentDefense?.Invoke(); } }
-	[SerializeField] int dayCount;
-	public int DayCount { get { return dayCount; } set { dayCount = value;} }
 	[SerializeField] bool isMoveButtonOn;
 	public bool IsMoveButtonOn { get { return isMoveButtonOn; } set { isMoveButtonOn = value; } }
 	[SerializeField] bool isMoveButtonClick;

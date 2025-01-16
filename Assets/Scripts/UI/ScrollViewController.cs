@@ -1,13 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScrollViewController : MonoBehaviour
 {
+	private List<int> usedMonsterIndexes = new List<int>();
+
 	[Header("Components")]
 	[SerializeField] TextBoxData[] boxData;
 	[SerializeField] TextBoxData[] victoryBoxData;
+	[SerializeField] TextBoxData[] monsterBoxData;
 	[SerializeField] TextBoxData currentBoxData;
 	[SerializeField] ScrollRect scrollRect;
 	[SerializeField] GameController gameController;
@@ -15,6 +19,7 @@ public class ScrollViewController : MonoBehaviour
 	[Header("Specs")]
 	[SerializeField] float currentYPosition;
 	[SerializeField] int randomIndex;
+	[SerializeField] int specialMonsterIndex;
 
 	private void Awake()
 	{
@@ -60,8 +65,45 @@ public class ScrollViewController : MonoBehaviour
 			return;
 		}
 
+		if ((Manager.Game.DayCount + 1) % 15 == 0)
+		{
+			if (specialMonsterIndex < monsterBoxData.Length)
+			{
+				CreateNewUiObject(monsterBoxData[specialMonsterIndex]);
+				specialMonsterIndex++;
+			}
+			return;
+		}
+
+		if ((Manager.Game.DayCount + 1) % 5 == 0)
+		{
+			int monsterIndex = GetRandomMonsterIndex();
+			if (monsterIndex != -1)
+			{
+				CreateNewUiObject(monsterBoxData[monsterIndex]);
+			}
+			return;
+		}
+
 		randomIndex = Random.Range(1, boxData.Length);
 		CreateNewUiObject(boxData[randomIndex]);
+	}
+
+	private int GetRandomMonsterIndex()
+	{
+		List<int> availableIndexes = new List<int>();
+
+		for (int i = 0; i < 6; i++)
+		{
+			if (!usedMonsterIndexes.Contains(i))
+			{
+				availableIndexes.Add(i);
+			}
+		}
+
+		int randomIndex = availableIndexes[Random.Range(0, availableIndexes.Count)];
+		usedMonsterIndexes.Add(randomIndex);
+		return randomIndex;
 	}
 
 	private void CreateNewUiObject(TextBoxData boxData)

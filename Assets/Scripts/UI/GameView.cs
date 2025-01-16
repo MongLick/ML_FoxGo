@@ -8,6 +8,8 @@ public class GameView : MonoBehaviour
 	[Header("Components")]
 	[SerializeField] GameModel model;
 	[SerializeField] Sprite[] buttonSprites;
+	[SerializeField] Image victoryUI;
+	[SerializeField] Image defeatUI;
 	[SerializeField] Slider experienceSlider;
 	[SerializeField] Slider healthSlider;
 	[SerializeField] Button defaultButton;
@@ -30,6 +32,8 @@ public class GameView : MonoBehaviour
 		model.OnLevel += UpdateLevelUI;
 		model.OnCurrentAttackPower += UpdateAttackPowerUI;
 		model.OnCurrentDefense += UpdateDefenseUI;
+		Manager.Game.OnPlayerDeath += UpdateDefeatUI;
+		Manager.Game.OnMonsterDeath += UpdateVictoryUI;
 	}
 
 	private void OnDisable()
@@ -41,6 +45,8 @@ public class GameView : MonoBehaviour
 		model.OnLevel -= UpdateLevelUI;
 		model.OnCurrentAttackPower -= UpdateAttackPowerUI;
 		model.OnCurrentDefense -= UpdateDefenseUI;
+		Manager.Game.OnPlayerDeath -= UpdateDefeatUI;
+		Manager.Game.OnMonsterDeath -= UpdateVictoryUI;
 	}
 
 	public void UpdateHealthUI()
@@ -73,7 +79,7 @@ public class GameView : MonoBehaviour
 
 	public void UpdateDayText(TextBoxData boxData)
 	{
-		boxData.DayText.text = $"{model.DayCount} 일차";
+		boxData.DayText.text = $"{Manager.Game.DayCount} 일차";
 	}
 
 	public void UpdateButtonStates(bool isChoice)
@@ -101,4 +107,27 @@ public class GameView : MonoBehaviour
 	{
 		defaultButton.interactable = interactable;
 	}
+
+	private void UpdateVictoryUI()
+	{
+		if (Manager.Game.DayCount == 45)
+		{
+			StartCoroutine(ShowUI(victoryUI));
+		}
+	}
+
+	private void UpdateDefeatUI()
+	{
+		StartCoroutine(ShowUI(defeatUI));
+	}
+
+	private IEnumerator ShowUI(Image image)
+	{
+		yield return new WaitForSeconds(1f);
+
+		Time.timeScale = 0f;
+
+		image.gameObject.SetActive(true);
+	}
+
 }
