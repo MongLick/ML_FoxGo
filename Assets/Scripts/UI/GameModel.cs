@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,6 +20,8 @@ public class GameModel : MonoBehaviour
 	public UnityAction OnCurrentDefense { get { return onCurrentDefense; } set { onCurrentDefense = value; } }
 
 	[Header("Specs")]
+	[SerializeField] float moveSpeed;
+	public float MoveSpeed { get { return moveSpeed; } set { moveSpeed = value; } }
 	[SerializeField] float currentHealth;
 	public float CurrentHealth { get { return currentHealth; } set { currentHealth = value; onCurrentHealth?.Invoke(); } }
 	[SerializeField] float maxHealth;

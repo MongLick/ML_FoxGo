@@ -9,7 +9,7 @@ public class ParallaxBackground : MonoBehaviour
 	[SerializeField] Vector3 moveDirection;
 
 	[Header("Specs")]
-	[SerializeField] float moveSpeed;	
+	[SerializeField] float moveSpeed;
 	[SerializeField] float scrollAmount;
 
 	private void Update()

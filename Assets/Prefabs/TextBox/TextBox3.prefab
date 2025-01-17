@@ -160,7 +160,7 @@ RectTransform:
   m_GameObject: {fileID: 1948702723489836010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1883190964409236633}
@@ -168,7 +168,7 @@ RectTransform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -185,13 +185,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayText: {fileID: 5889084541148505898}
-  victoryPrefab: []
   randomPrefab: []
   nextPrefab: {fileID: 0}
   leftPrefab: {fileID: 0}
   rightPrefab: {fileID: 0}
   dataTypes: 0100000000000000
   dataDayType: 1
+  dataPrefabType: 0
   values:
   - 20
   - 0
@@ -337,7 +337,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\uC77C\uCC28"
+  m_text: "2 \uC77C\uCC28"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}
   m_sharedMaterial: {fileID: -6776016962175281344, guid: 0bca5bae765e52b49abb8e19baad30f1, type: 2}

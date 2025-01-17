@@ -10,7 +10,7 @@ public class GameManager : Singleton<GameManager>
 	public UnityAction OnPlayerDeath { get { return onPlayerDeath; } set { onPlayerDeath = value; } }
 	private UnityAction onMonsterDeath;
 	public UnityAction OnMonsterDeath { get { return onMonsterDeath; } set { onMonsterDeath = value; } }
-	
+
 	[Header("Specs")]
 	[SerializeField] float playerOriginalX;
 	public float PlayerOriginalX { get { return playerOriginalX; } }
@@ -26,4 +26,10 @@ public class GameManager : Singleton<GameManager>
 	public bool IsArrival { get { return isArrival; } set { isArrival = value; onArrivalStateChanged?.Invoke(); } }
 	[SerializeField] bool isCombat;
 	public bool IsCombat { get { return isCombat; } set { isCombat = value; } }
+
+	protected override void Awake()
+	{
+		base.Awake();
+		Application.targetFrameRate = 60;
+	}
 }

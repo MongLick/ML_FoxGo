@@ -1,5 +1,3 @@
-using System.Collections;
-
 public class GameScene : BaseScene
 {
 	private void Start()

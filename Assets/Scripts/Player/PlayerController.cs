@@ -8,9 +8,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 	[SerializeField] GameModel gameModel;
 	[SerializeField] Animator animator;
 
-	[Header("Specs")]
-	[SerializeField] float moveSpeed;
-
 	private void OnEnable()
 	{
 		Manager.Game.OnArrivalStateChanged += UpdateAnimatorState;
@@ -68,7 +65,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 		animator.SetBool("Idle", false);
 		yield return MoveTo(Manager.Game.PlayerOriginalX);
 
-		if(!Manager.Game.IsArrival)
+		if (!Manager.Game.IsArrival)
 		{
 			yield break;
 		}
@@ -83,7 +80,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 		Vector3 currentPosition = transform.position;
 		while (Mathf.Abs(transform.position.x - targetX) > 0.01f)
 		{
-			float newX = Mathf.MoveTowards(transform.position.x, targetX, moveSpeed * Time.deltaTime);
+			float newX = Mathf.MoveTowards(transform.position.x, targetX, gameModel.MoveSpeed * Time.deltaTime);
 			transform.position = new Vector3(newX, currentPosition.y, currentPosition.z);
 			yield return null;
 		}

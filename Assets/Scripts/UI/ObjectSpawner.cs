@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static TextBoxData;
@@ -41,7 +40,7 @@ public class ObjectSpawner : MonoBehaviour
 
 		if (prefabDict.TryGetValue(prefabType, out var prefabAndPosition))
 		{
-			 return Instantiate(prefabAndPosition.prefab, prefabAndPosition.spawnPosition, Quaternion.identity);
+			return Instantiate(prefabAndPosition.prefab, prefabAndPosition.spawnPosition, Quaternion.identity);
 		}
 
 		return null;

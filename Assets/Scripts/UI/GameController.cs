@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using static TextBoxData;
 
@@ -265,7 +264,7 @@ public class GameController : MonoBehaviour
 		model.IsMoveButtonOn = false;
 		model.IsMoveButtonClick = false;
 
-		if(Manager.Game.IsCombat)
+		if (Manager.Game.IsCombat)
 		{
 			StartCombat();
 		}

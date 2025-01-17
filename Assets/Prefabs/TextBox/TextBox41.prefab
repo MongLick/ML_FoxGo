@@ -674,7 +674,7 @@ RectTransform:
   m_GameObject: {fileID: 7450925416391473294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.95, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1221171536393541670}
@@ -682,7 +682,7 @@ RectTransform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0.8, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -699,13 +699,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dayText: {fileID: 3900241350633390354}
-  victoryPrefab: []
   randomPrefab: []
   nextPrefab: {fileID: 0}
   leftPrefab: {fileID: 0}
   rightPrefab: {fileID: 0}
   dataTypes: 0400000000000000
   dataDayType: 1
+  dataPrefabType: 0
   values:
   - 10
   - 0
