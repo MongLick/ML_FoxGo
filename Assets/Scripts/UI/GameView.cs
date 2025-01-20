@@ -6,8 +6,11 @@ using UnityEngine.UI;
 public class GameView : MonoBehaviour
 {
 	[Header("Components")]
+	[SerializeField] GameController gameController;
+	[SerializeField] ScrollViewController scrollViewController;
 	[SerializeField] GameModel model;
 	[SerializeField] Sprite[] buttonSprites;
+	[SerializeField] Image levelUp;
 	[SerializeField] Image victoryUI;
 	[SerializeField] Image defeatUI;
 	[SerializeField] Slider experienceSlider;
@@ -22,6 +25,13 @@ public class GameView : MonoBehaviour
 	[SerializeField] TMP_Text defaultText;
 	[SerializeField] TMP_Text leftText;
 	[SerializeField] TMP_Text rightText;
+
+	private void Awake()
+	{
+		defaultButton.onClick.AddListener(UpdateDefaultButton);
+		leftButton.onClick.AddListener(UpdateLeftButton);
+		rightButton.onClick.AddListener(UpdateRightButton);
+	}
 
 	private void OnEnable()
 	{
@@ -47,6 +57,25 @@ public class GameView : MonoBehaviour
 		model.OnCurrentDefense -= UpdateDefenseUI;
 		Manager.Game.OnPlayerDeath -= UpdateDefeatUI;
 		Manager.Game.OnMonsterDeath -= UpdateVictoryUI;
+	}
+
+	private void UpdateDefaultButton()
+	{
+		scrollViewController.AddNewUiObject();
+		gameController.DefaultButtonCheck();
+		Manager.Sound.PlaySFX(Manager.Sound.UiButtonClip);
+	}
+
+	private void UpdateLeftButton()
+	{
+		scrollViewController.AddLeftUiObject();
+		Manager.Sound.PlaySFX(Manager.Sound.UiButtonClip);
+	}
+
+	private void UpdateRightButton()
+	{
+		scrollViewController.AddRightUiObject();
+		Manager.Sound.PlaySFX(Manager.Sound.UiButtonClip);
 	}
 
 	public void UpdateHealthUI()

@@ -7,6 +7,8 @@ public static class Manager
 	public static UIManager UI { get { return UIManager.Instance; } }
 	public static PoolManager Pool { get { return PoolManager.Instance; } }
 	public static SceneManager Scene { get { return SceneManager.Instance; } }
+	public static SoundManager Sound { get { return SoundManager.Instance; } }
+	public static SkillManager Skill { get { return SkillManager.Instance; } }
 
 	[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 	private static void Initialize()
@@ -25,5 +27,11 @@ public static class Manager
 
 		SceneManager.ReleaseInstance();
 		SceneManager.CreateInstance();
+
+		SoundManager.ReleaseInstance();
+		SoundManager.CreateInstance();
+
+		SkillManager.ReleaseInstance();
+		SkillManager.CreateInstance();
 	}
 }

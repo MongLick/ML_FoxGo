@@ -15,6 +15,7 @@ public class MonsterController : MonoBehaviour, IDamageable
 
 	private void OnEnable()
 	{
+		Manager.Sound.PlayBGM(Manager.Sound.BattleClip);
 		Manager.Game.OnArrivalStateChanged += UpdatePlayerTurn;
 		Manager.Turn.OnTurnChanged += UpdateTurnChanged;
 	}
@@ -98,6 +99,7 @@ public class MonsterController : MonoBehaviour, IDamageable
 	private IEnumerator DieCoroutine()
 	{
 		yield return new WaitForSeconds(1f);
+		Manager.Sound.PlayBGM(Manager.Sound.GameClip);
 		Destroy(gameObject);
 	}
 }

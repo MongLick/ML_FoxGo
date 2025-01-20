@@ -13,6 +13,7 @@ public class TitleSceneUI : MonoBehaviour
 
 	private void GameStart()
 	{
+		Manager.Sound.PlaySFX(Manager.Sound.UiButtonClip);
 		Manager.Scene.LoadScene("GameScene");
 	}
 }
